@@ -10,7 +10,7 @@ int main(){
     printf("Digite uma palavra: ");
     fgets(p, max, stdin);
     
-    p[strcspn(p, "\n")] = '\0'; //remove o \n que é pego pelo fgets
+    p[strcspn(p, "\n")] = '\0'; //procura o '\n' na string "p"
 
     z = strlen(p);
    
@@ -24,7 +24,7 @@ int main(){
     
     pi[y] = '\0';  // finaliza a string invertida
     
-    printf("%s\n", pi);
+    printf("Sua palavra invertida e: %s\n", pi);
 
     if(strcmp(p, pi) == 0){
         printf("Sua palavra e um palindromo");
