@@ -7,10 +7,10 @@ int main(){
     int x, y; //variaveis de controle da inversao da palavra para conferencia
     int z; //controle do tamanho da string
 
-    printf("Digite uma palavra: ");
+    printf("Digite uma palavra minuscula: ");
     fgets(p, max, stdin);
     
-    p[strcspn(p, "\n")] = '\0'; //procura o '\n' na string "p"
+    p[strcspn(p, "\n")] = '\0'; //procura o '\n' na string "p", que é pego pelo fgets
 
     z = strlen(p);
    
@@ -26,7 +26,7 @@ int main(){
     
     printf("Sua palavra invertida e: %s\n", pi);
 
-    if(strcmp(p, pi) == 0){
+    if(strcmp(p, pi) == 0){ //compara as duas strings
         printf("Sua palavra e um palindromo");
     }
     else{
