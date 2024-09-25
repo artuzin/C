@@ -22,7 +22,7 @@ int c[3][2];
 //compara as duas matrizes e atrbui 1 se for verdadeiro e 0 se for falso    
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 2; j++){
-            if(a[i][j] = b[i][j]){
+            if(a[i][j] == b[i][j]){
                 c[i][j] = 1;
             }
             else{
