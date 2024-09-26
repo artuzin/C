@@ -17,6 +17,7 @@ int media; //variável das
             printf("Digite a nota %d: ", j + 1);
             scanf("%d", &t[i][j]);
         }
+        printf("\n");
     } 
     
     return 0;
