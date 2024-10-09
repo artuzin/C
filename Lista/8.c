@@ -3,11 +3,10 @@
 const int max = 150; //tamanho maximo de alunos
 const int nn = 3; //número de notas para cada aluno
 
-
 int main(){
 int a; //numero de alunos na sala
 int t[max][nn]; //matriz dos alunos e notas 
-int media; //variável das 
+int media[]; //variável das medias
     printf("Digite o número de alunos: ");
     scanf("%d", &a);
     
@@ -18,6 +17,9 @@ int media; //variável das
             scanf("%d", &t[i][j]);
         }
         printf("\n");
+    }
+    for(int i = 0; i < nn; i++){
+        
     } 
     
     return 0;
