@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <math.h>
 
-void bhaskara ()
+void bhaskara () //procedimento de bhaskara
 {
     float a, b, c, delta, x1, x2;
-    
+    //lê os valores para A, B e C
     printf("Digite um valor para A: ");
     scanf("%f", &a);
-
+    //confere se o valor de A = 0, o que não seria permitido
     while(a == 0)
     {
         printf("Valor invalido, digite um valor diferente de 0 para A: ");
@@ -19,7 +19,7 @@ void bhaskara ()
 
     printf("Digite um valor para C: ");
     scanf("%f", &c);
-
+    //calcula delta e ja checa suas condições, calculando tambem asraizes
     delta = pow(b, 2) - (4 * a * c);
 
     if(delta == 0)
@@ -39,7 +39,7 @@ void bhaskara ()
         printf("Delta tem valor positivo e diferente de 0, possuindo duas raizes reais.\n x1 = %.2f e x2 = %.2f", x1, x2);
     }
 }
-
+//função principal que chama o procedimento bhaskara
 int main()
 {
     printf("Programa de resolucao de equacoes!\n");
