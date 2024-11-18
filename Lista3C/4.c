@@ -1,20 +1,29 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 int imprimir(int *v){
     printf("Valores do vetor: %d\n", *v);
-    v = v + 1; //avaça uma posição dentro do ponteiro, indo para o proximo elemento do vetor
+    *v++; //avança uma posição dentro do ponteiro, indo para o proximo elemento do vetor
     printf("Valores do vetor: %d\n", *v);
-    v = v + 1;
+    *v++;
     printf("Valores do vetor: %d\n", *v);
     return 0;
 }
 int main(){
     int *v = (int*)malloc(3 * sizeof(int));
-    int vetor[] = {4, 77, 123};
+    
+    int *v_start = v;
 
-    memcpy(v, vetor, 3 * sizeof(int)); //copia o numero de bytes declarados no terceiro parametro do segundo parametro ao primeiro (do array ate o ponteiro)
+    printf("Digite o primeiro valor do array: ");
+    scanf("%d", v);
+    v++;
+    printf("Digite o segundo valor do array: ");
+    scanf("%d", v);
+    v++;
+    printf("Digite o terceiro valor do array: ");
+    scanf("%d", v);
+
+    v = v_start;
     
     imprimir(v);
 

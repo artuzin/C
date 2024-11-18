@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int ord(int a,int b, int c){
+int ord(int *a,int *b, int *c){
     if(a == b && b == c){
         return 1;
     }
 }
 
-}
 int main(){
     //a funcção malloc reserva espço de memoria para o ponteiro guardar um valor inteiro
     int *a = (int*) malloc(sizeof(int));
