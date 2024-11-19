@@ -2,13 +2,31 @@
 #include <stdlib.h>
 
 int ord(int *a,int *b, int *c){
-    if(a == b && b == c){
+    if(*a == *b && *b == *c){
         return 1;
+    }
+    else{
+        if(*a > *b){
+            *a = *a + *b;
+            *b = *a - *b;
+            *a = *a - *b;
+        }
+        if(*a > *c){
+            *a = *a + *c;
+            *c = *a - *c;
+            *a = *a - *c;
+        }
+        if(*b > *c){
+            *b = *b + *c;
+            *c = *b - *c;
+            *b = *b - *c;
+        }
+            return *a, *b, *c;
     }
 }
 
 int main(){
-    //a funcção malloc reserva espço de memoria para o ponteiro guardar um valor inteiro
+    //a função malloc reserva espço de memoria para o ponteiro guardar um valor inteiro
     int *a = (int*) malloc(sizeof(int));
     int *b = (int*) malloc(sizeof(int));
     int *c = (int*) malloc(sizeof(int));
@@ -22,6 +40,9 @@ int main(){
 
     if(ord(a, b, c) == 1){
         printf("Os valores de A, B e C sao o mesmo");
+    }
+    else{
+        printf("Os valores em ordem crescente sao: %d, %d e %d", *a, *b, *c);
     }
 
 }
