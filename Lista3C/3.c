@@ -26,7 +26,7 @@ int ord(int *a,int *b, int *c){
 }
 
 int main(){
-    //a função malloc reserva espço de memoria para o ponteiro guardar um valor inteiro
+    //a função malloc reserva espaço de memoria para o ponteiro guardar um valor inteiro
     int *a = (int*) malloc(sizeof(int));
     int *b = (int*) malloc(sizeof(int));
     int *c = (int*) malloc(sizeof(int));
