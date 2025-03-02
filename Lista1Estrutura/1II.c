@@ -21,7 +21,7 @@ void main(){
                     }
                     else{
                         printf("Valor invalido para o salario, tente novamene\n");
-                       
+                        while (getchar() != '\n');
                     }
                     
                 }
