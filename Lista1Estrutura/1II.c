@@ -6,8 +6,17 @@ void main(){
 
     do{
         printf("Programa de reajuste salarial\n");
-        printf("Deseja continuar?\n1-Continuar\n2-Sair\n");
-        scanf("%i", &opcao);
+        while(1){
+            printf("Deseja continuar?\n1-Continuar\n2-Sair\n");
+            int validar_opcao = scanf("%i", &opcao);
+            if(validar_opcao == 1){
+                break;
+            }
+            else{
+                printf("Opcao invalida, insira um valor valido\n");
+                while(getchar() != '\n');
+            }
+        }
         
             if(opcao == 1){
                 while(1){

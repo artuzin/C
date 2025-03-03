@@ -13,9 +13,6 @@ void main(){
         printf("Programa de registro e calculo de notas.\n");
         printf("Escolha um opcao:\n1-Iniciar programa\n2-Encerrar\n");
         scanf("%i", &opcao);
-        
-        
-        
         switch (opcao) {
             case 1:
                 for(int i = 0; i < 3;){
@@ -85,6 +82,7 @@ void main(){
                 return 0;
             default:
                 printf("Opcao invalida, tente novamente.\n");
+                while(getchar() != '\n');
         }
     }
 }
