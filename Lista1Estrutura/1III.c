@@ -77,7 +77,7 @@ void main(){
 
     nf = (av1 + av2)/2;
 
-    printf("A nota final do aluno foi de %f", nf);
+    printf("A nota final do aluno foi de %.2f\n", nf);
 
 
             case 2:
