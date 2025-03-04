@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Faça uma narração/fluxo que leia o salário de um trabalhador e o valor da parcela de um empréstimo. Se a parcela for maior que 20% do salário, imprima: “Empréstimo aprovado”. Caso contrário, imprima “Empréstimo reprovado”.
+
 void main()
 {
     float salario, parcela;
@@ -27,6 +29,7 @@ void main()
                     else
                     {
                         printf("Valor invalido de salario, digite novamente.\n\n");
+                        while(getchar() != '\n');
 
                     }    
                 }
@@ -42,6 +45,7 @@ void main()
                     else
                     {
                         printf("Valor invalido de parcela, digite novamente.\n\n");
+                        while(getchar() != '\n');
                     }    
                 }        
                 if(parcela > salario * 0.2){
