@@ -18,7 +18,7 @@ int validar_nome(const char *nome){
 void main()
 {
     float salario, emprestimo, parcela;
-    int opcao, meses, c = 0, eA = 0, eR = 0;
+    int opcao, meses, c, eA, eR;
     char nome[50];
 
     printf("Programa de validacao de emprestimo.\n\n");
@@ -30,7 +30,11 @@ void main()
             while(getchar() != '\n');
             switch (opcao){
                 case 1:
-                    while(c < 3){
+                    c = 0;
+                    eA = 0;
+                    eR = 0;
+                    
+                    while(c < 10){
                         while(1){
                             printf("Digite seu nome: \n");
                             if(fgets(nome, 50, stdin) != NULL) //o fgets dispensa a limpeza de buffer, pois ele ja consome o dado inserido
@@ -77,7 +81,7 @@ void main()
                             }    
                         }
                         while(1){
-                            printf("Digite em quantos meses deseja quitar o emprestimo.(ATENCAO, USE VALORES INTEIROS)");
+                            printf("Digite em quantos meses deseja quitar o emprestimo.(ATENCAO, USE VALORES INTEIROS):\n");
                             int validar_meses = scanf("%i", &meses);
                             while(getchar() != '\n');
                             if(validar_meses == 1 && meses > 0){
@@ -101,8 +105,9 @@ void main()
                             eA++;
                         }
                     }
-                    printf("Emprestimos aprovados: %i", eA);
-                    printf("Emprestimos reprovados: %i", eR);
+                    printf("Emprestimos aprovados: %i\n\n", eA);
+                    printf("Emprestimos reprovados: %i\n\n", eR);
+                    break;
                 case 2:
                     printf("Encerrando programa...");
                     exit(1);

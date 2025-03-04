@@ -14,6 +14,7 @@ void main()
     {
         printf("1-Iniciar programa\n2-Sair\nEscolha uma opcao: ");
         scanf("%i", &opcao);
+        while(getchar() != '\n');
         switch (opcao)
         {
             case 1:
@@ -37,6 +38,7 @@ void main()
                 {
                     printf("Digite o valor da parcela: \n");
                     int validar_parcela = scanf("%f", &parcela);
+                    while(getchar() != '\n');
                     if(validar_parcela == 1 && parcela > 0)
                     {
                         printf("Valor registrado com sucesso!\n");
@@ -45,7 +47,6 @@ void main()
                     else
                     {
                         printf("Valor invalido de parcela, digite novamente.\n\n");
-
                     }    
                 }        
                 if(parcela > salario * 0.2){
@@ -61,7 +62,6 @@ void main()
                 exit(1);
             default:
                 printf("Opcao invalida, insira novamente.\n");
-                while(getchar() != '\n');
         }
     }
 }

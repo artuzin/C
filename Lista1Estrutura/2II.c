@@ -60,6 +60,7 @@ void main()
                 {
                     printf("Digite seu salario: \n");
                     int validar_salario = scanf("%f", &salario);
+                    while(getchar() != '\n');
                     if(validar_salario == 1 && salario > 0)
                     {
                         printf("Valor registrado com sucesso!\n");
@@ -68,7 +69,6 @@ void main()
                     else
                     {
                         printf("Valor invalido de salario, digite novamente.\n\n");
-                        while(getchar() != '\n');
 
                     }    
                 }
@@ -76,6 +76,7 @@ void main()
                 {
                     printf("Digite o valor da emprestimo: \n");
                     int validar_emprestimo = scanf("%f", &emprestimo);
+                    while(getchar() != '\n');
                     if(validar_emprestimo == 1 && emprestimo > 0)
                     {
                         printf("Valor registrado com sucesso!\n");
@@ -84,13 +85,13 @@ void main()
                     else
                     {
                         printf("Valor invalido de emprestimo, digite novamente.\n\n");
-                        while(getchar() != '\n');
                     }    
                 }
                 while(1)
                 {
                     printf("Digite em quantos meses deseja quitar o emprestimo.(ATENCAO, USE VALORES INTEIROS)");
                     int validar_meses = scanf("%i", &meses);
+                    while(getchar() != '\n');
                     if(validar_meses == 1 && meses > 0)
                     {
                         printf("Meses registrados!\n");
@@ -99,7 +100,6 @@ void main()
                     else
                     {
                         printf("Valor invalido para meses, digite outro.\n\n");
-                        while(getchar() != '\n');
                     }
                 }        
                 
