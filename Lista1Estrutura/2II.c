@@ -3,10 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 
-//Faça uma narração/fluxo que leia o salário de um trabalhador e o valor da parcela de um empréstimo. Se a parcela for maior que 20% do salário, imprima: “Empréstimo aprovado”. Caso contrário, imprima “Empréstimo reprovado”.
+//Faça uma narração/fluxo que descreva o cadastro de solicitações de empréstimos de clientes de um banco. O programa deve ler os seguintes dados: nome do cliente, salário do cliente, o valor do empréstimo e o número de meses para quitação.
+//O programa deve calcular o valor da parcela do empréstimo requerido.
+//Se o valor da parcela for maior que 20% do salário, o empréstimo será reprovado, caso contrário, o empréstimo será aprovado.
+ 
 int validar_nome(const char *nome){
-    for(size_t i = 0; i < strlen(nome); i++) {
-        if(!isalpha(nome[i]) && nome[i] != ' '){
+    for(size_t i = 0; i < strlen(nome); i++) { //size_t é um tipo de dado que é usado para representar indices ou tamanhos
+        if(!isalpha(nome[i]) && nome[i] != ' '){ //confere se so existe letras e espaços dentro da array de nome
             return 0;
         }
     }
@@ -32,7 +35,7 @@ void main()
                 while(1)
                 {
                     printf("Digite seu nome: \n");
-                    if(fgets(nome, 50, stdin) != NULL)
+                    if(fgets(nome, 50, stdin) != NULL) //o fgets dispensa a limpeza de buffer, pois ele ja consome o dado inserido
                     {
                         size_t len = strlen(nome);
                         if(len > 0 && nome[len - 1] == '\n')
@@ -51,7 +54,6 @@ void main()
                     else
                     {
                         printf("Erro ao ler nome. Tente novamente.\n");
-                        while(getchar() != '\n');
                     }    
                 }
                 while(1)
