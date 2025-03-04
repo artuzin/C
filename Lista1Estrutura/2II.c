@@ -38,31 +38,26 @@ void main()
                     if(fgets(nome, 50, stdin) != NULL) //o fgets dispensa a limpeza de buffer, pois ele ja consome o dado inserido
                     {
                         size_t len = strlen(nome);
-                        if(len > 0 && nome[len - 1] == '\n')
-                        {
+                        if(len > 0 && nome[len - 1] == '\n'){
                             nome[len - 1] = '\0';
                         }
                         if(validar_nome(nome) == 1){    
                             printf("Nome registrado com sucesso!\n");
                             break;
                         }
-                        else
-                        {
+                        else{
                             printf("Nome invalido. Utilize apenas letras e espacos.\n");
                         }
                     }
-                    else
-                    {
+                    else{
                         printf("Erro ao ler nome. Tente novamente.\n");
                     }    
                 }
-                while(1)
-                {
+                while(1){
                     printf("Digite seu salario: \n");
                     int validar_salario = scanf("%f", &salario);
                     while(getchar() != '\n');
-                    if(validar_salario == 1 && salario > 0)
-                    {
+                    if(validar_salario == 1 && salario > 0){
                         printf("Valor registrado com sucesso!\n");
                         break;
                     }
