@@ -21,16 +21,21 @@ void main(){
             if(opcao == 1){
                 while(1){
                     printf("Insira seu salario: ");
+                    
                     conferir_tipo = scanf("%f", &salario); //conferir_tipo tera valor 1 se um float foi associado a variavel salario e valor 0 se outro tipo for associado, pois scanf retorna 1 se conseguir associar corretamente
+                    
                     while (getchar() != '\n');
+                    
                     if(conferir_tipo == 1 && salario >= 0){
                         nsalario = salario * 1.25;
                         printf("Seu novo salario apos o reajuste e de: %.2f\n", nsalario);
                         break;
                     }
-                    else{
-                        printf("Valor invalido para o salario, tente novamene\n");
-                    }
+                    
+                    printf("Valor invalido para o salario, tente novamente\n\n");
+
+                    continue;
+
                     
                 }
             }
