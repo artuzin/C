@@ -21,6 +21,7 @@ void main()
                 {
                     printf("Digite seu salario: \n");
                     int validar_salario = scanf("%f", &salario);
+                    while(getchar() != '\n');
                     if(validar_salario == 1 && salario > 0)
                     {
                         printf("Valor registrado com sucesso!\n");
@@ -29,7 +30,6 @@ void main()
                     else
                     {
                         printf("Valor invalido de salario, digite novamente.\n\n");
-                        while(getchar() != '\n');
 
                     }    
                 }
@@ -45,7 +45,7 @@ void main()
                     else
                     {
                         printf("Valor invalido de parcela, digite novamente.\n\n");
-                        while(getchar() != '\n');
+
                     }    
                 }        
                 if(parcela > salario * 0.2){
