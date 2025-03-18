@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int opcao = 0;
-
 typedef struct{
-    float ap[3];
-    float media, np, av;
+    float ap[3], media_ap, np, av;
 }b;
 
 typedef struct {
-    b bimestre[2];
+    b b[2];
     int ra;
     float nf;
 }aluno;
@@ -19,10 +16,10 @@ void limpar(){
 }
 
 int main(){
-    aluno aluno;
-    b b;
+    aluno aluno;;
     int validar;
     int loop = 1;
+    int opcao = 0;
     
     while(1){
         printf("\n\n--------Programa de registro de notas--------\n\n");
@@ -38,10 +35,11 @@ int main(){
                     printf("Insira o RA do aluno: ");
                     
                     validar = scanf("%d", &aluno.ra);
+                    
                     limpar();
 
                     if(validar == 1 && aluno.ra > 10000000 && aluno.ra < 99999999){
-                        printf("RA inserido com sucesso!\n");
+                        printf("\nRA inserido com sucesso!\n");
                         loop = 0;
                     }
                     else{
@@ -56,12 +54,12 @@ int main(){
                     while(i < 3){
                         printf("Digite a nota de numero %d do primeiro bimestre: ", i + 1);
                         
-                        validar = scanf("%f", &b.ap[i]);
+                        validar = scanf("%f", &aluno.b[0].ap[i]);
                         
                         limpar();
 
-                        if(validar == 1 && b.ap[i] >= 0 && b.ap[i] <= 10){
-                            printf("A nota foi inserida com sucesso\n\n");
+                        if(validar == 1 && aluno.b[0].ap[i] >= 0 && aluno.b[0].ap[i] <= 10){
+                            printf("\nA nota foi inserida com sucesso\n\n");
                             i++;
                         }
                         else{
@@ -73,11 +71,14 @@ int main(){
                 while(loop == 1){
                     printf("Digite o valor da nota da prova do primeiro bimestre: ");
 
-                    validar = scanf("%f", &b.np);
+                    validar = scanf("%f", &aluno.b[0].np);
 
-                    if(validar == 1 && b.np >= 0 && .np <= 0){
+                    if(validar == 1 && aluno.b[0].np >= 0 && aluno.b[0].np <= 10){
                         printf("\nValor da prova inseirdo com sucesso!\n");
                         loop = 0;
+
+                        aluno.b[0].np = aluno.b[0].np * 0.7;
+
                     }
                     else{
                         printf("Valor invalido para a nota da prova");
@@ -86,6 +87,57 @@ int main(){
                 }
 
                 loop = 1;
+
+                for(int i = 0; i < 3;){
+                    while(i < 3){
+                        printf("Digite a nota de numero %d do segundo bimestre: ", i + 1);
+                        
+                        validar = scanf("%f", &aluno.b[1].ap[i]);
+                        
+                        limpar();
+
+                        if(validar == 1 && aluno.b[1].ap[i] >= 0 && aluno.b[1].ap[i] <= 10){
+                            printf("\nA nota foi inserida com sucesso\n\n");
+                            i++;
+                        }
+                        else{
+                            printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                        }
+                    }
+                }
+
+                while(loop == 1){
+                    printf("Digite o valor da nota da prova do segundo bimestre: ");
+
+                    validar = scanf("%f", &aluno.b[1].np);
+
+                    if(validar == 1 && aluno.b[1].np >= 0 && aluno.b[1].np <= 10){
+                        printf("\nValor da prova inseirdo com sucesso!\n");
+                        loop = 0;
+
+                        aluno.b[1].np = aluno.b[1].np * 0.7;
+
+                    }
+                    else{
+                        printf("Valor invalido para a nota da prova");
+                    }
+                    
+                }
+
+                aluno.b[0].media_ap = ((aluno.b[0].ap[0] + aluno.b[0].ap[1] + aluno.b[0].ap[2]) / 3);
+                aluno.b[0].av = (aluno.b[0].media_ap * 0.3) + aluno.b[0].np;
+
+                aluno.b[1].media_ap = ((aluno.b[1].ap[0] + aluno.b[1].ap[1] + aluno.b[1].ap[2]) / 3);
+                aluno.b[1].av = (aluno.b[1].media_ap * 0.3) + aluno.b[1].np;
+
+                aluno.nf = (aluno.b[0].av + aluno.b[1].av) / 2;
+
+                if(aluno.nf >= 6){
+                    printf("Aprovado!");
+                }
+                else{
+                    printf("Reprovado!");
+                }
 
             break;
         case 2:
