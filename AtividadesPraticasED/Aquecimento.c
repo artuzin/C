@@ -20,6 +20,7 @@ void limpar(){
 
 int main(){
     aluno aluno;
+    b b;
     int validar;
     int loop = 1;
     
@@ -48,10 +49,10 @@ int main(){
                     }
                     
                 }
-                printf("xereca!!!!!!!!!!!!!");
                 for(int i = 0; i < 3;){
                     while(i < 3){
-                        
+                        printf("Digite a nota de numero %d do primeiro bimestre: ", i + 1);
+                        validar = scanf("%f", &b.ap[i])
                     }
                 }
             break;
@@ -60,9 +61,9 @@ int main(){
             break;
         case 3:
             printf("\nSaindo do programa...\n\n");
-            exit(1);
+            return 0;
         default:
-            break;
+           
         }
 
     }
