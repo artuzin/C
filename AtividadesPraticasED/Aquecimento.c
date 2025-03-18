@@ -49,12 +49,44 @@ int main(){
                     }
                     
                 }
+
+                loop = 1;
+
                 for(int i = 0; i < 3;){
                     while(i < 3){
                         printf("Digite a nota de numero %d do primeiro bimestre: ", i + 1);
-                        validar = scanf("%f", &b.ap[i])
+                        
+                        validar = scanf("%f", &b.ap[i]);
+                        
+                        limpar();
+
+                        if(validar == 1 && b.ap[i] >= 0 && b.ap[i] <= 10){
+                            printf("A nota foi inserida com sucesso\n\n");
+                            i++;
+                        }
+                        else{
+                            printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                        }
                     }
                 }
+
+                while(loop == 1){
+                    printf("Digite o valor da nota da prova do primeiro bimestre: ");
+
+                    validar = scanf("%f", &b.np);
+
+                    if(validar == 1 && b.np >= 0 && .np <= 0){
+                        printf("\nValor da prova inseirdo com sucesso!\n");
+                        loop = 0;
+                    }
+                    else{
+                        printf("Valor invalido para a nota da prova");
+                    }
+                    
+                }
+
+                loop = 1;
+
             break;
         case 2:
         
@@ -63,7 +95,7 @@ int main(){
             printf("\nSaindo do programa...\n\n");
             return 0;
         default:
-           
+            printf("Opcao invalida, insira um valor valido.");
         }
 
     }
