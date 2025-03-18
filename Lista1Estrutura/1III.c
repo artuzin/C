@@ -42,7 +42,7 @@ void main(){
                     
                     int validarprova1 = scanf("%f", &np1);
                     
-                    while(getchar() != '\n');
+                    while(getchar() != '\n' && EOF);
                     
                     if(validarprova1 == 1 && 10 >= np1 && np1 >= 0){
                         printf("Valor da prova do primeiro bimestre inserido com sucesso!\n\n");

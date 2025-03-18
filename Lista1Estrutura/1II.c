@@ -18,30 +18,31 @@ void main(){
             }
         }
         
-            if(opcao == 1){
-                while(1){
-                    printf("Insira seu salario: ");
+        if(opcao == 1){
+            while(1){
+                printf("Insira seu salario: ");
                     
-                    conferir_tipo = scanf("%f", &salario); //conferir_tipo tera valor 1 se um float foi associado a variavel salario e valor 0 se outro tipo for associado, pois scanf retorna 1 se conseguir associar corretamente
+                conferir_tipo = scanf("%f", &salario); //conferir_tipo tera valor 1 se um float foi associado a variavel salario e valor 0 se outro tipo for associado, pois scanf retorna 1 se conseguir associar corretamente
                     
-                    while (getchar() != '\n');
+                while (getchar() != '\n');
                     
-                    if(conferir_tipo == 1 && salario >= 0){
-                        nsalario = salario * 1.25;
-                        printf("Seu novo salario apos o reajuste e de: %.2f\n", nsalario);
-                        break;
-                    }
-                    
-                    printf("Valor invalido para o salario, tente novamente\n\n");
-
-                    continue;
-
-                    
+                if(conferir_tipo == 1 && salario >= 0){
+                    nsalario = salario * 1.25;
+                    printf("Seu novo salario apos o reajuste e de: %.2f\n", nsalario);
+                    break;
                 }
+                    
+                printf("Valor invalido para o salario, tente novamente\n\n");
+
+                continue;
+
+                    
             }
-            else if(opcao != 2){
-                printf("Opcao invalida! Tente novamente.\n");
-            }
+        }
+        else if(opcao != 2){
+            printf("Opcao invalida! Tente novamente.\n");
+        }
+    
     }while(opcao != 2);
     printf("Encerrando programa...");
 }
