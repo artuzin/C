@@ -16,13 +16,31 @@ void limpar(){
 }
 
 int main(){
-    aluno aluno;;
-    int validar;
-    int loop = 1;
-    int opcao = 0;
+    int validar, loop = 1, opcao = 0, n_alunos;
     
+    printf("\n\n--------Programa de registro de notas--------\n\n");
+
+    while(loop == 1){
+        printf("Digite quantos alunos deseja cadastrar (INSIRA UM VALOR INTEIRO):");
+
+        if(scanf("%i", &n_alunos) == 1 && n_alunos > 0){
+            printf("\n===Prosseguindo com o cadastro de %d aluno(s)===\n\n", n_alunos);
+            loop = 0;
+            limpar();
+        }
+        else{
+            printf("Valor invalido para o numero de alunos, insira outro.\n");
+            limpar();
+        }
+    }
+
+    aluno aluno[n_alunos];
+    int situacao[n_alunos];
+    int dados_inseridos = 0;
+
+    loop = 1;
+
     while(1){
-        printf("\n\n--------Programa de registro de notas--------\n\n");
 
         printf("1-Iniciar programa\n2-Consultar notas\n3-Sair\nEscolha uma opcao: ");
         scanf("%d", &opcao);
@@ -31,117 +49,147 @@ int main(){
         switch (opcao)
         {
         case 1:
-                while(loop == 1){
-                    printf("Insira o RA do aluno: ");
+                for(int j = 0; j < n_alunos; j++){
                     
-                    validar = scanf("%d", &aluno.ra);
+                    printf("\n>>>>>>DADOS DO ALUNO %d<<<<<<\n", j + 1);
                     
-                    limpar();
-
-                    if(validar == 1 && aluno.ra > 10000000 && aluno.ra < 99999999){
-                        printf("\nRA inserido com sucesso!\n");
-                        loop = 0;
-                    }
-                    else{
-                        printf("Valor inserido nao corresponde a um RA, tente novamente!\n");
-                    }
-                    
-                }
-
-                loop = 1;
-
-                for(int i = 0; i < 3;){
-                    while(i < 3){
-                        printf("Digite a nota de numero %d do primeiro bimestre: ", i + 1);
+                    while(loop == 1){
+                        printf("Insira o RA do aluno : ");
                         
-                        validar = scanf("%f", &aluno.b[0].ap[i]);
+                        validar = scanf("%d", &aluno[j].ra);
                         
                         limpar();
 
-                        if(validar == 1 && aluno.b[0].ap[i] >= 0 && aluno.b[0].ap[i] <= 10){
-                            printf("\nA nota foi inserida com sucesso\n\n");
-                            i++;
+                        if(validar == 1 && aluno[j].ra > 10000000 && aluno[j].ra < 99999999){
+                            printf("RA inserido com sucesso!\n");
+                            loop = 0;
                         }
                         else{
-                            printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                            printf("Valor inserido nao corresponde a um RA, tente novamente!\n");
+                        }
+                        
+                    }
+
+                    loop = 1;
+
+                    printf("---PRIMEIRO SEMESTRE---");
+
+                    for(int i = 0; i < 3;){
+                        while(i < 3){
+                            printf("\nDigite a nota da atividade pratica %d: ", i + 1);
+                            
+                            validar = scanf("%f", &aluno[j].b[0].ap[i]);
+                            
+                            limpar();
+
+                            if(validar == 1 && aluno[j].b[0].ap[i] >= 0 && aluno[j].b[0].ap[i] <= 10){
+                                printf("\nA nota foi inserida com sucesso\n");
+                                i++;
+                            }
+                            else{
+                                printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                            }
                         }
                     }
-                }
 
-                while(loop == 1){
-                    printf("Digite o valor da nota da prova do primeiro bimestre: ");
+                    while(loop == 1){
+                        printf("Digite o valor da nota da prova do primeiro bimestre: ");
 
-                    validar = scanf("%f", &aluno.b[0].np);
+                        validar = scanf("%f", &aluno[j].b[0].np);
 
-                    if(validar == 1 && aluno.b[0].np >= 0 && aluno.b[0].np <= 10){
-                        printf("\nValor da prova inseirdo com sucesso!\n");
-                        loop = 0;
+                        if(validar == 1 && aluno[j].b[0].np >= 0 && aluno[j].b[0].np <= 10){
+                            printf("\nValor da prova inserido com sucesso!\n");
+                            loop = 0;
 
-                        aluno.b[0].np = aluno.b[0].np * 0.7;
+                            aluno[j].b[0].np = aluno[j].b[0].np * 0.7;
 
-                    }
-                    else{
-                        printf("Valor invalido para a nota da prova");
-                    }
-                    
-                }
-
-                loop = 1;
-
-                for(int i = 0; i < 3;){
-                    while(i < 3){
-                        printf("Digite a nota de numero %d do segundo bimestre: ", i + 1);
-                        
-                        validar = scanf("%f", &aluno.b[1].ap[i]);
-                        
-                        limpar();
-
-                        if(validar == 1 && aluno.b[1].ap[i] >= 0 && aluno.b[1].ap[i] <= 10){
-                            printf("\nA nota foi inserida com sucesso\n\n");
-                            i++;
                         }
                         else{
-                            printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                            printf("Valor invalido para a nota da prova");
+                        }
+                        
+                    }
+
+                    loop = 1;
+
+                    printf("---SEGUNDO SEMESTRE---\n");
+
+                    for(int i = 0; i < 3;){
+                        while(i < 3){
+                            printf("Digite a nota da atividade pratica %d: ", i + 1);
+                            
+                            validar = scanf("%f", &aluno[j].b[1].ap[i]);
+                            
+                            limpar();
+
+                            if(validar == 1 && aluno[j].b[1].ap[i] >= 0 && aluno[j].b[1].ap[i] <= 10){
+                                printf("\nA nota foi inserida com sucesso\n\n");
+                                i++;
+                            }
+                            else{
+                                printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                            }
                         }
                     }
-                }
 
-                while(loop == 1){
-                    printf("Digite o valor da nota da prova do segundo bimestre: ");
+                    while(loop == 1){
+                        printf("Digite o valor da nota da prova do segundo bimestre: ");
 
-                    validar = scanf("%f", &aluno.b[1].np);
+                        validar = scanf("%f", &aluno[j].b[1].np);
 
-                    if(validar == 1 && aluno.b[1].np >= 0 && aluno.b[1].np <= 10){
-                        printf("\nValor da prova inseirdo com sucesso!\n");
-                        loop = 0;
+                        if(validar == 1 && aluno[j].b[1].np >= 0 && aluno[j].b[1].np <= 10){
+                            printf("\nValor da prova inseirdo com sucesso!\n");
+                            loop = 0;
 
-                        aluno.b[1].np = aluno.b[1].np * 0.7;
+                            aluno[j].b[1].np = aluno[j].b[1].np * 0.7;
 
+                        }
+                        else{
+                            printf("Valor invalido para a nota da prova");
+                        }
+                        
+                    }
+
+                    loop = 1;
+
+                    aluno[j].b[0].media_ap = ((aluno[j].b[0].ap[0] + aluno[j].b[0].ap[1] + aluno[j].b[0].ap[2]) / 3);
+                    aluno[j].b[0].av = (aluno[j].b[0].media_ap * 0.3) + aluno[j].b[0].np;
+
+                    aluno[j].b[1].media_ap = ((aluno[j].b[1].ap[0] + aluno[j].b[1].ap[1] + aluno[j].b[1].ap[2]) / 3);
+                    aluno[j].b[1].av = (aluno[j].b[1].media_ap * 0.3) + aluno[j].b[1].np;
+
+                    aluno[j].nf = (aluno[j].b[0].av + aluno[j].b[1].av) / 2;
+
+                    if(aluno[j].nf >= 6){
+                        situacao[j] = 1;
                     }
                     else{
-                        printf("Valor invalido para a nota da prova");
+                        situacao[j] = 0;
                     }
-                    
                 }
 
-                aluno.b[0].media_ap = ((aluno.b[0].ap[0] + aluno.b[0].ap[1] + aluno.b[0].ap[2]) / 3);
-                aluno.b[0].av = (aluno.b[0].media_ap * 0.3) + aluno.b[0].np;
-
-                aluno.b[1].media_ap = ((aluno.b[1].ap[0] + aluno.b[1].ap[1] + aluno.b[1].ap[2]) / 3);
-                aluno.b[1].av = (aluno.b[1].media_ap * 0.3) + aluno.b[1].np;
-
-                aluno.nf = (aluno.b[0].av + aluno.b[1].av) / 2;
-
-                if(aluno.nf >= 6){
-                    printf("Aprovado!");
-                }
-                else{
-                    printf("Reprovado!");
-                }
+                dados_inseridos = 1;
 
             break;
         case 2:
-        
+                if(dados_inseridos == 0){
+                    printf("\n|||Nao ha dados para serem exibidos, va ate a opcao 1 no menu para inseri-los.|||\n\n");
+                }
+                else{
+                    for(int j = 0; j < n_alunos; j++){
+                        
+                        printf("\n>>>>DADOS DO ALUNO %d<<<<\n", j + 1);
+                        printf("RA: %d\n", aluno[j].ra);
+                        printf("Nota final: %.2f\n", aluno[j].nf);
+                        
+                        if(situacao[j] == 1){
+                            printf("Situacao: Aprovado!\n\n");
+                        }
+                        else{
+                            printf("Situacao: Reprovado!\n\n");
+                        }
+                    }
+                }
             break;
         case 3:
             printf("\nSaindo do programa...\n\n");
