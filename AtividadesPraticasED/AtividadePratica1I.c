@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+//Artur Boudens e Giulia Biacchi
+
 typedef struct {
     float valor, parcela;
     int meses;
