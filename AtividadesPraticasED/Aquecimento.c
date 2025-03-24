@@ -42,7 +42,7 @@ int main(){
 
     while(1){
 
-        printf("1-Iniciar programa\n2-Consultar notas\n3-Sair\nEscolha uma opcao: ");
+        printf("1-Iniciar programa\n2-Consultar notas\n3-Sair\nEscolha uma opcao: \n");
         scanf("%d", &opcao);
         limpar();
 
@@ -190,6 +190,7 @@ int main(){
                         }
                     }
                 }
+                limpar();
             break;
         case 3:
             printf("\nSaindo do programa...\n\n");
