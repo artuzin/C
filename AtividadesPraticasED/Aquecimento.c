@@ -82,12 +82,17 @@ int main(){
                             
                             limpar();
 
-                            if(validar == 1 && aluno[j].b[0].ap[i] >= 0 && aluno[j].b[0].ap[i] <= 10){
-                                printf("\nA nota foi inserida com sucesso\n");
-                                i++;
-                            }
+                            if(validar == 1){
+                                if(aluno[j].b[0].ap[i] >= 0 && aluno[j].b[0].ap[i] <= 10){
+                                    printf("\nA nota foi inserida com sucesso\n");
+                                    i++;
+                                }
+                                else{
+                                    msg_erro("O valor da nota deve ser entre 0 e 10.");
+                                }
+                            }   
                             else{
-                                printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                                msg_erro("Valor invalido para a nota da atividade pratica.");
                             }
                         }
                     }
@@ -97,15 +102,19 @@ int main(){
 
                         validar = scanf("%f", &aluno[j].b[0].np);
 
-                        if(validar == 1 && aluno[j].b[0].np >= 0 && aluno[j].b[0].np <= 10){
-                            printf("\nValor da prova inserido com sucesso!\n");
-                            loop = 0;
+                        if(validar == 1){
+                            if(aluno[j].b[0].np >= 0 && aluno[j].b[0].np <= 10){
+                                printf("\nValor da prova inserido com sucesso!\n");
+                                loop = 0;
 
-                            aluno[j].b[0].np = aluno[j].b[0].np * 0.7;
-
+                                aluno[j].b[0].np = aluno[j].b[0].np * 0.7;
+                            }
+                            else{
+                                msg_erro("A nota deve ser entre 0 e 10.");
+                            }
                         }
                         else{
-                            printf("Valor invalido para a nota da prova");
+                            msg_erro("Valor invalido para a nota da prova");
                         }
                         
                     }
@@ -122,12 +131,17 @@ int main(){
                             
                             limpar();
 
-                            if(validar == 1 && aluno[j].b[1].ap[i] >= 0 && aluno[j].b[1].ap[i] <= 10){
-                                printf("\nA nota foi inserida com sucesso\n\n");
-                                i++;
+                            if(validar == 1){
+                                if(aluno[j].b[1].ap[i] >= 0 && aluno[j].b[1].ap[i] <= 10){
+                                    printf("\nA nota foi inserida com sucesso\n\n");
+                                    i++;
+                                }
+                                else{
+                                    msg_erro("A nota deve ser entre 0 e 10.");
+                                }
                             }
                             else{
-                                printf("O valor inserido nao corresponde a uma nota, tente novamente!\n");
+                                msg_erro("Valor invalido para a nota da atividade pratica.");
                             }
                         }
                     }
@@ -137,15 +151,19 @@ int main(){
 
                         validar = scanf("%f", &aluno[j].b[1].np);
 
-                        if(validar == 1 && aluno[j].b[1].np >= 0 && aluno[j].b[1].np <= 10){
-                            printf("\nValor da prova inseirdo com sucesso!\n");
-                            loop = 0;
+                        if(validar == 1){
+                            if(aluno[j].b[1].np >= 0 && aluno[j].b[1].np <= 10){
+                                printf("\nValor da prova inseirdo com sucesso!\n");
+                                loop = 0;
 
-                            aluno[j].b[1].np = aluno[j].b[1].np * 0.7;
-
+                                aluno[j].b[1].np = aluno[j].b[1].np * 0.7;
+                            }
+                            else{
+                                msg_erro("A nota deve ser entre 0 e 10.");
+                            }
                         }
                         else{
-                            printf("Valor invalido para a nota da prova");
+                            msg_erro("Valor invalido para a nota da prova");
                         }
                         
                     }
@@ -176,19 +194,7 @@ int main(){
                     printf("\n|||Nao ha dados para serem exibidos, va ate a opcao 1 no menu para inseri-los.|||\n\n");
                 }
                 else{
-                    for(int j = 0; j < n_alunos; j++){
-                        
-                        printf("\n>>>>DADOS DO ALUNO %d<<<<\n", j + 1);
-                        printf("RA: %d\n", aluno[j].ra);
-                        printf("Nota final: %.2f\n", aluno[j].nf);
-                        
-                        if(situacao[j] == 1){
-                            printf("Situacao: Aprovado!\n\n");
-                        }
-                        else{
-                            printf("Situacao: Reprovado!\n\n");
-                        }
-                    }
+                    dados_alunos();
                 }
                 limpar();
             break;
