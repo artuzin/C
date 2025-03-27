@@ -35,7 +35,7 @@ int main(){
     int l1 = 1, l2= 1;
     int validar, opcao, c, eA, eR;
 
-    while(l1 == 1){
+    while(l1){
         printf("\n\n--------Programa de Simulacao de Emprestimo--------\n\n");
 
         printf("1- Iniciar programa\n2-Sair\nEscolha uma opcao: ");
