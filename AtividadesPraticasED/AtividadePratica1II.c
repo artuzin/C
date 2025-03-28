@@ -56,15 +56,16 @@ int main(){
                         if(len > 0 && cliente.nome[len - 1] == '\n'){
                             cliente.nome[len - 1] = '\0';
                         }
-                            if(validar_nome(cliente.nome) == 1){    
-                                printf("Nome registrado com sucesso!\n");
-                                l2 = 0;
-                            }
                         
-                            else{
-                                printf("Nome invalido. Utilize apenas letras e espacos.\n");
-                            }
+                        if(validar_nome(cliente.nome) == 1){    
+                            printf("Nome registrado com sucesso!\n");
+                            l2 = 0;
                         }
+                        
+                        else{
+                            printf("Nome invalido. Utilize apenas letras e espacos.\n");
+                        }
+                    }
                     else{
                         printf("Erro ao ler nome, tente novamente!");
                     }   

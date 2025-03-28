@@ -1,5 +1,5 @@
-#ifndef UTILS.H
-#define UTILS.H
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +12,7 @@
     #define LT "clear"
 #endif
 
-extern int validar, c, eA, eR, l2;
+extern int validar, c, eA, eR, l2, i;
 
 typedef struct {
     float valor, parcela;
@@ -25,9 +25,14 @@ typedef struct{
     emprestimo emprestimo;
 }cliente;
 
-int validar_nome(const char *nome);
+int validar_nome(char *nome);
+
 void limpar();
+
 void msg_erro(char *msg);
-void dados_emprestimo();
+
+void calculo_parcela(cliente *cliente, int n_clientes);
+
+void dados_emprestimo(cliente *cliente, int *situacao, int n_clientes);
 
 #endif
