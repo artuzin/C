@@ -1,5 +1,7 @@
 #include "utils.c"
 
+//Artur Boudens e Giulia Biacchi
+
 int validar, opcao, n_clientes, l1 = 1, l2 = 1, c = 0, i = 0, eA = 0, eR = 0;
 
 int main(){
@@ -50,11 +52,11 @@ int main(){
                             l2 = 0;
                         }
                         else{
-                            printf("Nome invalido. Utilize apenas letras e espaços");
+                            printf("Nome invalido. Utilize apenas letras e espacos\n");
                         }
                     }
                     else{
-                        printf("Erro ao ler o nome, insira novamente");
+                        printf("Erro ao ler o nome, insira novamente\n");
                     }
                 }
 
