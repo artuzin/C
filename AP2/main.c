@@ -146,7 +146,7 @@ int main(){
             
             printf("Emprestimos Aprovados: %d\n", eA);
             printf("Emprestimos Reprovados: %d\n\n", eR);
-            printf("---------------Dados dos Clientes---------------");
+            printf("---------------Dados dos Clientes---------------\n");
         
             dados_emprestimo(cliente, situacao, n_clientes);
 
@@ -156,6 +156,7 @@ int main(){
             printf("Saindo do programa...\n");
             exit(1);
         default:
+            msg_erro("Digite uma opcao valida.");
             break;
         }
     }
