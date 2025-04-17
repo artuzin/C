@@ -20,66 +20,224 @@ void msg_erro(char *msg){
     getchar();
 }
 
-/* 
-    ATENÇÃO: A função "realocar_memoria_cliente" deve ser implementada pelo aluno 
-*/
+//Função para validar se existem apenas letras e espaços no nome do cliente
+int validar_nome(char *nome){
+    for(size_t i = 0; i < strlen(nome); i++){
+        if(!isalpha(nome[i]) && nome[i] != ' '){
+            return 0;
+        }
+    }
+    return 1;
+}
 
 // Função para alocar ou realocar memória para o array de clientes
 Cliente* realocar_memoria_cliente(Cliente *clientes, int novo_tamanho) {
     // Realoca memória para o array de clientes
-
-    return;
+    Cliente *temp = realloc(clientes, novo_tamanho * sizeof(Cliente));
+    if (temp == NULL){
+        msg_erro("Erro na realocacao de memoria.");
+        free(clientes);
+        exit(1);
+    }
+    return temp;
 }
-
-
-/* 
-    ATENÇÃO: A função "realocar_memoria_emprestimo" deve ser implementada pelo aluno 
-*/
 
 // Função para alocar ou realocar memória para o array de emprestimos
 Emprestimo* realocar_memoria_emprestimo(Emprestimo *emprestimos, int novo_tamanho) {
-
     // Realoca memória para o array de empréstimos
-
-    return;
+    Emprestimo *temp = realloc(emprestimos, novo_tamanho * sizeof(Emprestimo));
+    if(temp == NULL){
+        msg_erro("Erro na realocacao de memoria.");
+        free(emprestimos);
+        exit(1);
+    }
+    return temp;
 }
-
-
-/* 
-    ATENÇÃO: A função "cadastrar_novo_cliente" deve ser implementada pelo aluno 
-*/
 
 // Cadastra um novo cliente e adiciona ao array de clientes
 Cliente *cadastrar_novo_cliente(Cliente *clientes, int *num_clientes) {
+    clientes = realocar_memoria_cliente(clientes, *num_clientes + 1);//realoca memoria para o cliente
+    Cliente *novo_cliente = &clientes[*num_clientes]; //aponta o ponteiro novo_cliente para a ultima posicao do vetor de clientes
+    
+    int l = 1;
+    
+    while(l){
+        printf("Digite o nome do cliente: ");
+        if(fgets(novo_cliente->nome, MAX_NOME, stdin) != NULL){
+            novo_cliente->nome[strcspn(novo_cliente->nome, "\n")] = '\0';
 
-    return;
+            if(validar_nome(novo_cliente->nome) == 1){
+                printf("Nome registrado com sucesso.");
+                l = 0;
+            }
+            else{
+                msg_erro("Nome inserido invalido, utilize apenas letras e espacos.");
+            }
+        }
+        else{
+            msg_erro("Erro ao ler o nome, tente novamente.");
+        }
+    }
+
+    l = 1;
+
+    while(l){
+        printf("\nDigite o ID do cliente(ATENCAO, USE APENAS NUMEROS INTEIROS): ");
+        int validar_id = scanf("%d", &novo_cliente->id);
+
+        if(validar_id == 1){
+            if(novo_cliente->id > 10){
+                printf("ID registrado com sucesso!\n");
+                limpar_buffer();
+                l = 0;
+            }
+            else{
+                msg_erro("Numero de ID ja registrado.");
+            }
+        }
+        else{
+            msg_erro("Valor invalido para ID de cliente.");
+        }
+    }
+
+    l = 1;
+
+    while(l){
+        printf("\nDigite o salario do cliente: ");
+        int validar_salario = scanf("%f", &novo_cliente->salario);
+
+        if(validar_salario == 1){
+            if(novo_cliente->salario >= 2000 && novo_cliente->salario <= 15000){
+                printf("Salario registrado com sucesso!\n");
+                limpar_buffer();
+                l = 0;
+            }
+            else{
+                msg_erro("O valor do salario deve estar entre 2.000 e 15.000");
+            }
+        }
+        else{
+            msg_erro("Valor invalido para o salario.");
+        }
+    }
+    novo_cliente->historico_emprestimos = NULL; //inicializa as variáveis do novo cliente para serem nulas ou zero
+    novo_cliente->num_emprestimos = 0;
+    (*num_clientes)++;
+    return clientes;
 }
-
-/*
-    ATENÇÃO: A função "solicitar_novo_emprestimo" deve ser implementada pelo aluno 
-*/
 
 // Solicita um novo empréstimo para um cliente
 void solicitar_novo_emprestimo(Cliente *clientes, int num_clientes) {
+    int temp_id, l = 1;
+    Cliente *cliente = NULL;
+    
+    while(l){
+        printf("Digite o ID do cliente que deseja solicitar um emprestimo: ");
+        int validar_temp_id = scanf("%d", &temp_id);
 
+        if(validar_temp_id == 1){
+            cliente = buscar_cliente_por_id(clientes, num_clientes, temp_id);
+            if(cliente != NULL){
+                printf("Cliente encontrado com sucesso!\n");
+                limpar_buffer();
+                l = 0;
+            }
+            else{
+                msg_erro("Cliente nao encontrado.");
+            }
+        }
+        else{
+            msg_erro("Valor invalido para ID de cliente.");
+        }
+    }
+
+    l = 1;
+
+    Emprestimo novo_emp;
+    novo_emp.cliente_id = temp_id;
+
+    while(l){
+        printf("Digite o valor do emprestimo: ");
+        int validar_emprestimo = scanf("%f", &novo_emp.valor_emprestimo);
+
+        if(validar_emprestimo == 1){
+            if(novo_emp.valor_emprestimo >= 1000 && novo_emp.valor_emprestimo <= 200000){
+                printf("Valor inserido com sucesso!\n");
+                limpar_buffer();
+                l = 0;
+            }
+            else{
+                msg_erro("O valor do emprestimo deve estar entre 1.000 e 200.000");
+            }
+        }
+        else{
+            msg_erro("Tipo de dado inserido esta errado.");
+        }
+    }
+
+    l = 1;
+
+    while(l){
+        printf("\nDigite o numero de vezes que deseja parcelar(ATENCAO, USE NUMERO INTEIROS): ");
+        int validar_parcelas = scanf("%d", &novo_emp.num_parcelas);
+
+        if(validar_parcelas == 1){
+            if(novo_emp.num_parcelas >= 6 && novo_emp.num_parcelas <= 180){
+                printf("Numero de parcelas inserido com sucesso!");
+                limpar_buffer();
+                l = 0;
+            }
+            else{
+                msg_erro("O numero de parcelas deve estar entre 6 e 180");
+            }
+        }
+        else{
+            msg_erro("Tipo de dado inserido para a parcela esta errado, tente novamente.");
+        }
+    }
+    calcular_valor_parcela(&novo_emp);
+    aprovar_reprovar_emprestimo(cliente, &novo_emp);
 }
-
-/*
-    ATENÇÃO: A função "solicitar_novo_emprestimo" deve ser implementada pelo aluno 
-*/
 
 // Calcula o valor da parcela do empréstimo
 void calcular_valor_parcela(Emprestimo *emprestimo) {
-
+    float total = emprestimo->valor_emprestimo * (1 + TAXA_JUROS);
+    emprestimo->valor_parcela = total / emprestimo->num_parcelas;
 }
-
-/*
-    ATENÇÃO: A função "solicitar_novo_emprestimo" deve ser implementada pelo aluno 
-*/
 
 // Aprova ou reprova o empréstimo com base no salário do cliente
 void aprovar_reprovar_emprestimo(Cliente *cliente, Emprestimo *novo_emprestimo) {
+    float soma_parcelas = novo_emprestimo->valor_parcela;
 
+    
+    for(int i = 0; i < cliente->num_emprestimos; i++){
+        if(cliente->historico_emprestimos[i].ativo){
+            soma_parcelas += cliente->historico_emprestimos[i].valor_parcela; //soma apenas os emprestimos ativos
+        }
+    }
+    //Confere os valores
+    if(soma_parcelas > LIMITE_PARCELA * cliente->salario){
+        novo_emprestimo->aprovacao = 0;
+        novo_emprestimo->ativo = 0;
+        printf("\nEmprestimo reprovado!\n");
+    }
+    else{
+        novo_emprestimo->aprovacao = 1;
+        novo_emprestimo->ativo = 1;
+        printf("\nEmprestimo aprovado!\n");
+    }
+
+    //Realoca memoria se necessario
+    Emprestimo *temp = realocar_memoria_emprestimo(cliente->historico_emprestimos, cliente->num_emprestimos + 1);
+
+    if(temp){
+        cliente->historico_emprestimos = temp; //Aponta o ponteiro para o local correto novamente se houve mudança
+        cliente->historico_emprestimos[cliente->num_emprestimos] = *novo_emprestimo; //Coloca o último empréstimo na última posição
+        cliente->num_emprestimos++; //Adiciona na contagem de empréstimos realizados
+    }
+    else{
+        printf("Erro para registrar emprestimo no historico\n.");
+    }
 }
 
 

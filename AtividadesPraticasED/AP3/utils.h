@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio_ext.h>
+#include <ctype.h>
+//#include <stdio_ext.h>
 
 #ifdef _WIN32
     #define LIMPAR_TELA "cls"
@@ -40,6 +41,7 @@ typedef struct Cliente {
 // Funções já implementadas
 void limpar_buffer();
 void msg_erro(char *msg);
+int validar_nome(char *nome);
 Cliente *carregar_clientes(const char *nome_arquivo, int *num_clientes);
 Emprestimo *carregar_emprestimos(const char *nome_arquivo, Cliente *clientes, int num_clientes);
 void adicionar_emprestimo_historico(Cliente *cliente, Emprestimo emprestimo);
