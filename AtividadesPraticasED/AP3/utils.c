@@ -15,7 +15,7 @@ void msg_erro(char *msg){
     system(LIMPAR_TELA);
     printf("\n----------------Erro------------------------------\n");
     printf("%s", msg);
-    printf("----------------------------------------------------\n");
+    printf("\n----------------------------------------------------\n");
     printf("\nAperte <ENTER> para voltar ao menu principal.");
     getchar();
 }
@@ -368,9 +368,6 @@ Emprestimo *carregar_emprestimos(const char *nome_arquivo, Cliente *clientes, in
 // Adiciona um novo empréstimo ao histórico do cliente
 void adicionar_emprestimo_historico(Cliente *cliente, Emprestimo emprestimo) {
 
-    /* 
-        ATENÇÃO: A função "realocar_memoria_emprestimo" deve ser implementada pelo aluno
-    */
     cliente->historico_emprestimos = realocar_memoria_emprestimo(cliente->historico_emprestimos, cliente->num_emprestimos + 1);
 
     // Verifica se a realocação foi bem-sucedida

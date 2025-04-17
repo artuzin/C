@@ -7,6 +7,7 @@
 #include <ctype.h>
 //#include <stdio_ext.h>
 
+
 #ifdef _WIN32
     #define LIMPAR_TELA "cls"
 #else
