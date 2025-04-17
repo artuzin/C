@@ -86,14 +86,9 @@ Cliente *cadastrar_novo_cliente(Cliente *clientes, int *num_clientes) {
         int validar_id = scanf("%d", &novo_cliente->id);
 
         if(validar_id == 1){
-            if(novo_cliente->id > 10){
-                printf("ID registrado com sucesso!\n");
-                limpar_buffer();
-                l = 0;
-            }
-            else{
-                msg_erro("Numero de ID ja registrado.");
-            }
+            printf("ID registrado com sucesso!\n");
+            limpar_buffer();
+            l = 0;
         }
         else{
             msg_erro("Valor invalido para ID de cliente.");
