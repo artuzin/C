@@ -16,7 +16,7 @@ void msg_erro(char *msg){
     printf("\n----------------Erro------------------------------\n");
     printf("%s", msg);
     printf("\n----------------------------------------------------\n");
-    printf("\nAperte <ENTER> para voltar ao menu principal.");
+    printf("\nAperte <ENTER> para inserir novamente.");
     getchar();
 }
 
@@ -62,11 +62,11 @@ Cliente *cadastrar_novo_cliente(Cliente *clientes, int *num_clientes) {
     int l = 1;
     
     while(l){
-        printf("Digite o nome do cliente: ");
+        printf("Digite o nome do cliente: "); //Resgistro de nome
         if(fgets(novo_cliente->nome, MAX_NOME, stdin) != NULL){
-            novo_cliente->nome[strcspn(novo_cliente->nome, "\n")] = '\0';
+            novo_cliente->nome[strcspn(novo_cliente->nome, "\n")] = '\0'; //Troca do final da string
 
-            if(validar_nome(novo_cliente->nome) == 1){
+            if(validar_nome(novo_cliente->nome) == 1){ //Chama a função para conferir se existem apenas letras e espaços
                 printf("Nome registrado com sucesso.");
                 l = 0;
             }
@@ -82,16 +82,31 @@ Cliente *cadastrar_novo_cliente(Cliente *clientes, int *num_clientes) {
     l = 1;
 
     while(l){
-        printf("\nDigite o ID do cliente(ATENCAO, USE APENAS NUMEROS INTEIROS): ");
+        printf("\nDigite o ID do cliente(ATENCAO, USE APENAS NUMEROS INTEIROS): "); //Registro de ID
         int validar_id = scanf("%d", &novo_cliente->id);
+        
+        if(validar_id != 1){ //Confere se houve a leitura correta da entrada
+            msg_erro("Valor invalido para ID do cliente.");
+            continue; //Retorna até a parte onde o ID é inserido
+        }
 
-        if(validar_id == 1){
-            printf("ID registrado com sucesso!\n");
-            limpar_buffer();
-            l = 0;
+        int id_existe = 0; //Variável de controle para conferir se ID já existe
+        for(int i = 0; i < *num_clientes; i++){
+            if(clientes[i].id == novo_cliente->id){ //Confere o ID de todos os clientes no vetor
+                    id_existe = 1; //Sinaliza que o ID inserido já está no sistema
+                    break;
+            }
+        }
+    
+
+        if(id_existe){  //Sinaliza ao usuário a situação do ID
+            msg_erro("ID ja registrado no sistema.");
         }
         else{
-            msg_erro("Valor invalido para ID de cliente.");
+            printf("\nID registrado com sucesso.\n");
+            limpar_buffer();
+            l = 0;
+            
         }
     }
 
@@ -214,12 +229,10 @@ void aprovar_reprovar_emprestimo(Cliente *cliente, Emprestimo *novo_emprestimo) 
     if(soma_parcelas > LIMITE_PARCELA * cliente->salario){
         novo_emprestimo->aprovacao = 0;
         novo_emprestimo->ativo = 0;
-        printf("\nEmprestimo reprovado!\n");
     }
     else{
         novo_emprestimo->aprovacao = 1;
         novo_emprestimo->ativo = 1;
-        printf("\nEmprestimo aprovado!\n");
     }
 
     //Realoca memoria se necessario
@@ -334,15 +347,9 @@ Emprestimo *carregar_emprestimos(const char *nome_arquivo, Cliente *clientes, in
             // Se o cliente for encontrado, aprova ou reprova o empréstimo
             if (cliente) {
 
-                /* 
-                    ATENÇÃO: A função "aprovar_reprovar_emprestimo" deve ser implementada pelo aluno 
-                */
                 aprovar_reprovar_emprestimo(cliente, &novo_emprestimo);     // Aprova ou reprova o empréstimo
                 adicionar_emprestimo_historico(cliente, novo_emprestimo);   // Adiciona o empréstimo ao histórico do cliente
 
-                /* 
-                    ATENÇÃO: A função "realocar_memoria_emprestimo" deve ser implementada pelo aluno 
-                */
                 todos_emprestimos = realocar_memoria_emprestimo(todos_emprestimos, (num_emprestimos_total + 1));
 
                 if (!todos_emprestimos) {

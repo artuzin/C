@@ -2,6 +2,9 @@
 #include "utils.c"
 
 int main(int argc, char *argv[]) {
+    
+    setlocale(LC_ALL, "pt_BR.UTF-8");
+
     if (argc != 3) {
         fprintf(stderr, "Uso: %s <clientes.csv> <emprestimos.csv>\n", argv[0]);
         return 1;
