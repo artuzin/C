@@ -1,7 +1,7 @@
 #include <stdio.h>
 int i, n, r;
 int main(){
-    i=1;
+    i = 1;
     while(i <= 5){
         printf("Digite um numero: ");
         scanf("%d", &n);
