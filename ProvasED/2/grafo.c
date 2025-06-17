@@ -381,9 +381,33 @@ void DFS_Ponderada(Grafo* grafo, int vertice_inicial, int vertice_final) {
             break;          // Sai do loop se o vértice final foi encontrado
         }
 
-        Vertice* vizinho = grafo->adj[vertice_atual]; // Obtém a lista de adjacência do vértice atual
+        Vertice* vizinho;
+
+        vizinho = grafo->adj[vertice_atual]; // Obtém a lista de adjacência do vértice atual
         while (vizinho) {
-            if (!visitado[vizinho->vertice]) {
+            if (!visitado[vizinho->vertice] && vizinho->peso == 3) {
+                visitado[vizinho->vertice] = true; // Marca o vizinho como visitado
+                predecessor[vizinho->vertice] = vertice_atual; // Atualiza o predecessor
+                push(pilha, vizinho->vertice); // Adiciona o vizinho à pilha
+                imprime_pilha(pilha); // Imprime o estado da pilha após adicionar o vizinho
+            }
+            vizinho = vizinho->prox; // Avança para o próximo vizinho
+        }
+
+        vizinho = grafo->adj[vertice_atual]; // Obtém a lista de adjacência do vértice atual
+        while (vizinho) {
+            if (!visitado[vizinho->vertice] && vizinho->peso == 2) {
+                visitado[vizinho->vertice] = true; // Marca o vizinho como visitado
+                predecessor[vizinho->vertice] = vertice_atual; // Atualiza o predecessor
+                push(pilha, vizinho->vertice); // Adiciona o vizinho à pilha
+                imprime_pilha(pilha); // Imprime o estado da pilha após adicionar o vizinho
+            }
+            vizinho = vizinho->prox; // Avança para o próximo vizinho
+        }
+
+        vizinho = grafo->adj[vertice_atual]; // Obtém a lista de adjacência do vértice atual
+        while (vizinho) {
+            if (!visitado[vizinho->vertice] && vizinho->peso == 1) {
                 visitado[vizinho->vertice] = true; // Marca o vizinho como visitado
                 predecessor[vizinho->vertice] = vertice_atual; // Atualiza o predecessor
                 push(pilha, vizinho->vertice); // Adiciona o vizinho à pilha
@@ -392,6 +416,12 @@ void DFS_Ponderada(Grafo* grafo, int vertice_inicial, int vertice_final) {
             vizinho = vizinho->prox; // Avança para o próximo vizinho
         }
     }
+
+    if (vertice_atual == vertice_final) {
+            encontrado = 1; // Marca que o vértice final foi encontrado
+        }
+
+
     printf("\nOrdem de visitação: ");
     // Imprime a ordem de visitação dos vértices
     for (int i = 0; i < idx; i++) {
@@ -434,40 +464,64 @@ void BFS_Ponderada(Grafo* grafo, int vertice_inicial, int vertice_final) {
         predecessor[i] = -1;    // Inicializa o vetor de predecessores
     }
 
-    Fila* fila = criar_fila();  // Cria a fila para a BFS
+    Fila* fila1 = criar_fila();
+    Fila* fila2 = criar_fila();
+    Fila* fila3 = criar_fila();
+
     int* ordem = (int*) malloc(grafo->num_vertices * sizeof(int)); // Vetor para armazenar a ordem de visitação
     int idx = 0; // Índice para a ordem de visitação
 
     printf(BLUE_TEXT "\n\nBusca em Largura (BFS) a partir do vértice %d:\n" RESET_TEXT, vertice_inicial);
 
-    enfileira(fila, vertice_inicial);   // Adiciona o vértice inicial à fila
-    imprime_fila(fila);                 // Imprime o estado da fila
     visitado[vertice_inicial] = true;   // Marca o vértice inicial como visitado
-    int vertice_atual = vertice_inicial;// Variável para armazenar o vértice atual
+    enfileira(fila1, vertice_inicial);
+    imprime_fila(fila1);
+    imprime_fila(fila2);
+    imprime_fila(fila3);
+
+    int vertice_atual;
     int encontrado = 0;                 // Variável para controlar se o vértice final foi encontrado
 
-    while (!fila_vazia(fila)) {
-        vertice_atual = desenfileira(fila); // Remove o vértice do início da fila
+    while (!fila_vazia(fila1) || !fila_vazia(fila2) || !fila_vazia(fila3)) {
+        
+        if (!fila_vazia(fila1)) {
+            vertice_atual = desenfileira(fila1);
+        } else if (!fila_vazia(fila2)) {
+            vertice_atual = desenfileira(fila2);
+        } else {
+            vertice_atual = desenfileira(fila3);
+        }
+        
         ordem[idx++] = vertice_atual;       // Armazena o vértice atual na ordem de visitação
         printf("Vertice atual: %d\n", vertice_atual); // Imprime o vértice atual
-        imprime_fila(fila); // Imprime o estado da fila após a remoção do vértice atual
-
+        
         if (vertice_atual == vertice_final) {
             encontrado = 1; // Marca que o vértice final foi encontrado
             break;          // Sai do loop se o vértice final foi encontrado
         }
 
         Vertice* vizinho = grafo->adj[vertice_atual];   // Obtém a lista de adjacência do vértice atual
-        while (vizinho) {
+        while(vizinho) {
             if (!visitado[vizinho->vertice]) {
-                visitado[vizinho->vertice] = true; // Marca o vizinho como visitado
-                predecessor[vizinho->vertice] = vertice_atual; // Atualiza o predecessor
-                enfileira(fila, vizinho->vertice); // Adiciona o vizinho à fila
-                imprime_fila(fila); // Imprime o estado da fila após adicionar o vizinho
+                visitado[vizinho->vertice] = true;
+                predecessor[vizinho->vertice] = vertice_atual;
+
+                switch (vizinho->peso) {
+                    case 1:
+                        enfileira(fila1, vizinho->vertice);
+                        break;
+                    case 2:
+                        enfileira(fila2, vizinho->vertice);
+                        break;
+                    case 3:
+                        enfileira(fila3, vizinho->vertice);
+                        break;
+                }
             }
-            vizinho = vizinho->prox; // Avança para o próximo vizinho
+            vizinho = vizinho->prox;
         }
     }
+    
     printf("\nOrdem de visitação: ");
     for (int i = 0; i < idx; i++) {
         printf("%d ", ordem[i]);
@@ -481,12 +535,13 @@ void BFS_Ponderada(Grafo* grafo, int vertice_inicial, int vertice_final) {
         printf(RED_TEXT "Vértice final %d não encontrado.\n" RESET_TEXT, vertice_final);
     }
 
-    libera_fila(fila);
+    libera_fila(fila1);
+    libera_fila(fila2);
+    libera_fila(fila3);
     free(ordem);
     free(visitado);
     free(predecessor);
 }
-
 
 /**
  * @brief Imprime o caminho encontrado entre dois vértices.
